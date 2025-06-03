@@ -16,6 +16,12 @@ const backBtn = document.getElementById("back-btn");
 const settingsBackBtn = document.getElementById("settings-back-btn");
 const buyPremiumBtn = document.getElementById("buy-premium-btn");
 
+// Кнопки навигации
+const homeBtn = document.getElementById("home-btn");
+const profileBtn = document.getElementById("profile-btn");
+const settingsNavBtn = document.getElementById("settings-nav-btn");
+const findPartnersBtn = document.getElementById("find-partners-btn");
+
 // Состояние приложения
 let currentUser = null;
 let pageHistory = [];
@@ -29,6 +35,7 @@ async function initApp() {
       showPage('home-page');
       await renderCards();
     } catch (error) {
+      console.error('Init error:', error);
       localStorage.removeItem('token');
       showPage('container');
     }
@@ -43,9 +50,11 @@ function showPage(pageId) {
 }
 
 function goBack() {
-  pageHistory.pop();
-  const prevPage = pageHistory.pop();
-  if (prevPage) showPage(prevPage);
+  if (pageHistory.length > 1) {
+    pageHistory.pop(); // Удаляем текущую страницу
+    const prevPage = pageHistory[pageHistory.length - 1];
+    showPage(prevPage);
+  }
 }
 
 // Рендер карточек
@@ -140,25 +149,29 @@ addGameBtn.addEventListener("click", async () => {
 
 // Покупка премиума
 buyPremiumBtn.addEventListener("click", () => {
-  // Здесь будет логика оплаты через Telegram WebApp
   window.Telegram.WebApp.showAlert("Функция оплаты будет реализована позже");
 });
 
 // Навигация
-document.querySelector(".nav-bar button:nth-child(2)").addEventListener("click", () => {
+homeBtn.addEventListener("click", () => {
+  showPage("home-page");
+});
+
+profileBtn.addEventListener("click", () => {
   if (currentUser) openProfile(currentUser.id, true);
+});
+
+settingsNavBtn.addEventListener("click", () => {
+  showPage("settings-page");
+});
+
+findPartnersBtn.addEventListener("click", () => {
+  showPage("home-page");
+  renderCards();
 });
 
 backBtn.addEventListener("click", goBack);
 settingsBackBtn.addEventListener("click", goBack);
-
-document.querySelector(".nav-bar button:nth-child(3)").addEventListener("click", () => {
-  showPage("settings-page");
-});
-
-document.querySelector(".nav-bar button:nth-child(1)").addEventListener("click", () => {
-  showPage("home-page");
-});
 
 // Тема
 const toggleDark = document.getElementById("toggle-dark");

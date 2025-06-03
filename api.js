@@ -1,4 +1,4 @@
-const API_BASE = 'http://109.172.39.61:8000/'; // Замените на ваш реальный API
+const API_BASE = 'http://109.172.39.61:8000/';
 
 async function fetchData(endpoint, options = {}) {
   try {
@@ -11,7 +11,10 @@ async function fetchData(endpoint, options = {}) {
       }
     });
     
-    if (!response.ok) throw new Error('API request failed');
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.message || 'API request failed');
+    }
     return await response.json();
   } catch (error) {
     console.error('API Error:', error);
@@ -46,7 +49,7 @@ export const api = {
     return fetchData('/users/me');
   },
 
-   async buyPremium() {
+  async buyPremium() {
     return fetchData('/payments/premium', {
       method: 'POST'
     });
