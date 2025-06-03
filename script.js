@@ -14,6 +14,7 @@ const newGameInput = document.getElementById("new-game");
 const addGameBtn = document.getElementById("add-game-btn");
 const backBtn = document.getElementById("back-btn");
 const settingsBackBtn = document.getElementById("settings-back-btn");
+const buyPremiumBtn = document.getElementById("buy-premium-btn");
 
 // Состояние приложения
 let currentUser = null;
@@ -86,6 +87,7 @@ async function openProfile(userId, isCurrent = false) {
     `).join('');
 
     profileActions.classList.toggle("hidden", !isCurrent);
+    buyPremiumBtn.style.display = isCurrent ? 'block' : 'none';
     showPage("profile-page");
   } catch (error) {
     alert("Failed to load profile");
@@ -134,6 +136,12 @@ addGameBtn.addEventListener("click", async () => {
   } catch (error) {
     alert("Failed to add game");
   }
+});
+
+// Покупка премиума
+buyPremiumBtn.addEventListener("click", () => {
+  // Здесь будет логика оплаты через Telegram WebApp
+  window.Telegram.WebApp.showAlert("Функция оплаты будет реализована позже");
 });
 
 // Навигация

@@ -44,5 +44,15 @@ export const api = {
 
   async getCurrentUser() {
     return fetchData('/users/me');
-  }
+  },
+
+   async buyPremium() {
+    return fetchData('/payments/premium', {
+      method: 'POST'
+    });
+  },
+
+  async checkPremiumStatus() {
+    return fetchData('/users/me/premium');
+  }  
 };
