@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gaming Partners Finder</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Страница регистрации -->
+  <div class="container">
+    <h1>Create Account</h1>
+    <p>Create your account to connect with fellow gamers</p>
+
+    <input type="text" id="gaming-nickname" placeholder="Enter your gaming nickname" />
+    <input type="text" id="telegram-nickname" placeholder="Enter your Telegram nickname" />
+
+    <div class="checkbox">
+      <input type="checkbox" id="terms" />
+      <label for="terms">I agree with <a href="#">Terms & Conditions</a></label>
+    </div>
+
+    <button id="sign-up">Sign Up</button>
+    <p class="login">Already registered?<a href="#"> Log In</a></p>
+  </div>
+
+  <!-- Главная страница -->
+  <div id="home-page" class="page hidden">
+    <div class="top-bar">
+      <input type="text" id="search" placeholder="Search for partners..." />
+      <button id="join-now">Join Now</button>
+    </div>
+
+    <div id="cards-list"></div>
+    <button id="filter-btn">Filter by Game</button>
+
+    <div class="nav-bar">
+      <button>🏠 Home</button>
+      <button>👤 Profile</button>
+      <button>⚙️ Settings</button>
+      <button>🎮 Find Partners</button>
+    </div>
+  </div>
+
+  <!-- Страница профиля -->
+  <div id="profile-page" class="page hidden">
+    <button id="back-btn">← Back</button>
+
+    <div class="profile-header">
+      <div class="avatar-placeholder">👤</div>
+      <input type="text" id="profile-nickname" readonly />
+    </div>
+
+    <div id="games-list"></div>
+
+    <div id="profile-actions" class="hidden">
+      <input type="text" id="new-game" placeholder="Add a game..." />
+      <button id="add-game-btn">Add Game</button>
+    </div>
+
+    <button id="settings-btn">⚙️ Settings</button>
+  </div>
+
+  <!-- Страница настроек -->
+  <div id="settings-page" class="page hidden">
+    <button id="settings-back-btn">← Back</button>
+    <h2>Settings</h2>
+
+    <div class="setting">
+      <label>
+        <span>Notifications</span>
+        <input type="checkbox" id="toggle-notifications" />
+      </label>
+    </div>
+
+    <div class="setting">
+      <label>
+        <span>Sound</span>
+        <input type="checkbox" id="toggle-sound" />
+      </label>
+    </div>
+
+    <div class="setting">
+      <label>
+        <span>Dark Theme</span>
+        <input type="checkbox" id="toggle-dark" />
+      </label>
+    </div>
+  </div>
+
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script type="module" src="api.js"></script>
+  <script type="module" src="script.js"></script>
+</body>
+</html>
